@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_app_1/HomePage/examples_grid.dart';
+import 'package:provider/provider.dart';
+import 'package:test_app_1/IntroPage/intro_page.dart';
+import 'package:test_app_1/widgets/CurrentUser.dart';
 
 class HomePage extends StatefulWidget {
   static const route = '/homePage';
@@ -9,6 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void logout() {
+    context.read<CurrentUser>().logOut();
+    Navigator.pushReplacementNamed(context, IntroPage.route);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +38,10 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: ExamplesGrid(),
+          ),
+          ElevatedButton(
+            child: Text('Log out'),
+            onPressed: logout,
           )
         ],
       ),

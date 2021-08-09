@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_app_1/HomePage/home_page.dart';
 import 'package:test_app_1/widgets/CurrentUser.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,9 @@ class _IntroPageState extends State<IntroPage> {
     }
   }
 
+  final Future<bool> isLogged = SharedPreferences.getInstance()
+      .then((value) => value.getBool(('isLoggedIn')));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +53,17 @@ class _IntroPageState extends State<IntroPage> {
                   image: AssetImage('img/logo.png'),
                 ),
               )),
-              Text('Flutter Test App'),
+              FutureBuilder(
+                  future: isLogged,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return Text('${snapshot.data}');
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  }),
+              Text(
+                  'Flutter Test App ${context.watch<CurrentUser>().isLoggedIn}'),
               Form(
                 key: _formKey,
                 child: Column(
