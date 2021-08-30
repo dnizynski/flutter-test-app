@@ -15,6 +15,9 @@ class ExampleListItem extends StatelessWidget {
         width: 125,
         height: 125,
       ),
+      SizedBox(
+        height: 10,
+      ),
       ElevatedButton(
           onPressed: () => Navigator.pushNamed(context, route),
           child: Text(itemText))

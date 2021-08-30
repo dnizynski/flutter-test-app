@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_app_1/HomePage/home_page.dart';
 import 'package:test_app_1/InfiniteScrollPage/infinite_scroll.dart';
+import 'package:test_app_1/TapPage/tap_page.dart';
 import 'package:test_app_1/constants/theme.dart';
 import 'package:test_app_1/widgets/CurrentUser.dart';
 import 'package:test_app_1/widgets/conditional_router.dart';
@@ -27,7 +28,8 @@ class AppWrapper extends StatelessWidget {
                   IntroPage.route: (context) => IntroPage(),
                 }, private: {
                   HomePage.route: (context) => HomePage(),
-                  InfiniteScrollPage.route: (context) => InfiniteScrollPage()
+                  InfiniteScrollPage.route: (context) => InfiniteScrollPage(),
+                  TapPage.route: (context) => TapPage()
                 }))));
   }
 }

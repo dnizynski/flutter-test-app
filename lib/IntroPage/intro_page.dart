@@ -57,13 +57,19 @@ class _IntroPageState extends State<IntroPage> {
                   future: isLogged,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      return Text('${snapshot.data}');
+                      if (snapshot.data) {
+                        // context.read<CurrentUser>().logIn();
+                        Future.delayed(Duration.zero, () {
+                          Navigator.pushReplacementNamed(
+                              context, HomePage.route);
+                        });
+                      }
+
+                      return SizedBox();
                     } else {
-                      return CircularProgressIndicator();
+                      return SizedBox();
                     }
                   }),
-              Text(
-                  'Flutter Test App ${context.watch<CurrentUser>().isLoggedIn}'),
               Form(
                 key: _formKey,
                 child: Column(
@@ -78,6 +84,9 @@ class _IntroPageState extends State<IntroPage> {
                       ),
                     ),
                     TextFormField(
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
                       validator: validator,
                       controller: _passwordTextController,
                       decoration: InputDecoration(
@@ -91,7 +100,6 @@ class _IntroPageState extends State<IntroPage> {
                 child: ElevatedButton(
                   onPressed: login,
                   child: Container(
-                    padding: EdgeInsets.all(10),
                     child: Text(
                       'Login',
                       style: TextStyle(color: Colors.white, fontSize: 25),
